@@ -1,44 +1,32 @@
 package com.example.lab5;
 
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import java.util.ArrayList;
-import java.util.List;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+    DatabaseReference databaseProducts;
+
 
     EditText editTextName;
     EditText editTextPrice;
@@ -48,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     List<Product> products;
 
     protected void onCreate(Bundle savedInstanceState) {
+        databaseProducts = FirebaseDatabase.getInstance().getReference("products");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -80,31 +69,33 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-    }
-        super.onStart();
         databaseProducts.addValueEventListener(new ValueEventListener() {
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            products.clear;
-            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                Product product = postSnapshot.getValue(Product.class);
-                products.add(product);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                products.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Product product = postSnapshot.getValue(Product.class);
+                    products.add(product);
+                }
+                ProductList productsAdapter = new ProductList(MainActivity.this, products);
+                listViewProducts.setAdapter(productsAdapter);
+
             }
-            ProductList productsAdapter = new ProductList(MainActivity.this, products);
-            listViewProducts.setAdapter(productsAdapter);
 
-        }
+            public void onCancelled(DatabaseError databaseError) {
 
-        public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
-        }
-    });
+    }
+
+
 
 
     private void showUpdateDeleteDialog(final String productId, String productName) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.update_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.activity_add_product, null);
         dialogBuilder.setView(dialogView);
 
         final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName);
@@ -136,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void updateProduct(String id, String name, double price) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("products").child(id);
