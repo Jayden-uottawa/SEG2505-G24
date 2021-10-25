@@ -6,4 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".addProduct">
 
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="250dp"
+        android:text=""
+        android:hint="Enter name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <EditText
+        android:id="@+id/editTextPrice"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="310dp"
+        android:text=""
+        android:hint="Enter price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <Button
+        android:id="@+id/buttonUpdateProduct"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="370dp"
+        android:text="UPDATE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <Button
+        android:id="@+id/buttonDeleteProduct"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="220dp"
+        android:layout_marginTop="370dp"
+        android:text="DELETE"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
