@@ -18,7 +18,7 @@ public class ProductList extends ArrayAdapter<Product> {
     List<Product> products;
 
     public ProductList(Activity context, List<Product> products) {
-        super(context, R.layout.activity_add_product, products);
+        super(context, R.layout.support_simple_spinner_dropdown_item, products);
         this.context = context;
         this.products = products;
     }
@@ -26,7 +26,7 @@ public class ProductList extends ArrayAdapter<Product> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.activity_add_product, null, true);
+        View listViewItem = inflater.inflate(R.layout.support_simple_spinner_dropdown_item, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.editTextName);
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.editTextPrice);
