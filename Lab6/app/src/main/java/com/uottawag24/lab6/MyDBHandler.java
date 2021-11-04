@@ -67,5 +67,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
             cursor.close();
             result = true;
         }
+        return result;
     }
 }
