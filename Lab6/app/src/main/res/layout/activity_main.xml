@@ -85,10 +85,11 @@
         android:id="@+id/btnFind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
         android:layout_marginTop="148dp"
         android:text="FIND"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="158dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnDelete"
