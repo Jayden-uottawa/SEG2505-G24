@@ -27,40 +27,41 @@ public class MainActivity extends AppCompatActivity {
         bAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newProduct(productBox);
+                newProduct(v);
             }
         });
         final Button bRem = findViewById(R.id.btnDelete);
         bRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeProduct(productBox);
+                removeProduct(v);
             }
         });
         final Button bLook = findViewById(R.id.btnFind);
         bLook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lookupProduct(productBox);
+                lookupProduct(v);
             }
         });
     }
 
     public void newProduct (View view) {
         MyDBHandler dbHandler = new MyDBHandler(this);
-        Product product = dbHandler.findProduct(productBox.getText().toString());
+        Product product = new Product(productBox.getText().toString(),Integer.parseInt(skuBox.getText().toString()));
+        dbHandler.addProduct(product);
 
     }
 
     public void lookupProduct (View view) {
         MyDBHandler dbHandler = new MyDBHandler(this);
-        Product product = dbHandler.findProduct(productBox.getText().toString());
+        Product product =dbHandler.findProduct(productBox.getText().toString());
 
     }
 
     public void removeProduct (View view) {
         MyDBHandler dbHandler = new MyDBHandler(this);
-        boolean result = dbHandler.deleteProduct(productBox.getText().toString());
+        boolean result =dbHandler.deleteProduct(productBox.getText().toString());
 
     }
 
