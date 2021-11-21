@@ -5,6 +5,6 @@ public class ActivityTestRule<T> {
         
     }
 
-    public T getActivity() {
+    public void getActivity() {
     }
 }
